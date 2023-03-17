@@ -4,7 +4,7 @@ config()
 import express from 'express'
 import cors from 'cors'
 
-import routes from './routes/user_auth.route.js'
+import userAuth_routes from './routes/user_auth.route.js'
 
 const app = express()
 const port = process.env.POST || 4000
@@ -15,8 +15,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // routes
-app.use('/api', routes)
+app.get('/api', (req, res) => {
+    res.json({'Message':'base path'})
+})
+// app.use('/api/docs', docs)
+app.use('/api/user', userAuth_routes)
 
 app.listen(port, () => {
-    console.log(`Express app is listening on http://localhost:${port}/api`);
+    console.log(`Express is now running on localhost:${port}`);
 })
