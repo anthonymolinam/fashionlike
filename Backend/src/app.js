@@ -1,6 +1,3 @@
-import { config } from 'dotenv'
-config()
-
 import express from 'express'
 import cors from 'cors'
 
@@ -8,7 +5,6 @@ import userAuth_routes from './routes/user_auth.route.js'
 
 // initialization
 const app = express()
-const port = process.env.POST || 4000
 
 // middlewares
 app.use(cors())

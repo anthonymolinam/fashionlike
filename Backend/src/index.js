@@ -1,3 +1,6 @@
+import { config } from 'dotenv'
+config()
+
 import app from './app'
 
 async function main(port) {
