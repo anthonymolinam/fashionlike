@@ -10,5 +10,5 @@ export const login = async (req, res) => {
 export const signup = async (req, res) => {
     const { username, email, password } = req.query
     const response = await insertUser(username, email, password)
-    res.json(response)
+    res.json({ 'response': response })
 }

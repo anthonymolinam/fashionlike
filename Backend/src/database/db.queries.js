@@ -8,7 +8,13 @@ export const insertUser = async (username, email, password) => {
         const response = await client.query(text, values)
         return response
     } catch (e) {
-        return e.detail.includes('username') ? { 'Error': 'username ya registrado' } : { 'Error': 'email ya registrado' }
+        return e.detail.includes('username') ? {
+            'error': e.detail,
+            'message': 'Este nombre de usuario ya está registrado'
+        } : {
+            'error': e.detail,
+            'message': 'Este email ya está registrado'
+        }
     }
 }
 
@@ -20,9 +26,9 @@ const selectUser = async (username, password) => {
         if (!response.rows.length) {
             return 'Nombre de usuario o contraseña incorrecto'
         }
-        return 'Session iniciada'
+        return 'Sesión iniciada'
     } catch (e) {
-        return { 'Error': e }
+        return { 'error': e.detail }
     }
 }
 
@@ -32,10 +38,10 @@ export const findUser = async (username, password) => {
         const value = [username]
         const response = await client.query(text, value)
         if (!response.rows.length) {
-            return 'El usuario no existe'
+            return 'Este nombre de usuario no existe'
         }
         return selectUser(username, password)
     } catch (e) {
-        return { 'Error': e }
+        return { 'error': e.detail }
     }
 }
