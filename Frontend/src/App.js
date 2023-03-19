@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { AccountBox } from './components/accountBox';
 import { ExtraBox } from './components/extra';
 
+
 const AppContainer = styled.div`
   width: 100%;
   height: 100vh;
