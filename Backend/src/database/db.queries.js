@@ -1,11 +1,10 @@
-import e from "express";
 import client from "./db.connect";
 
-export const insertUser = async (username, email, password) => {
+export const createUser = async (username, email, password) => {
     try {
-        const text = "INSERT INTO users(username, email, password) VALUES($1, $2, crypt($3, gen_salt('bf')))"
-        const values = [username, email, password]
-        const response = await client.query(text, values)
+        const insertInto = "INSERT INTO users(username, email, password) VALUES($1, $2, crypt($3, gen_salt('bf')))"
+        const insertValues = [username, email, password]
+        const response = await client.query(insertInto, insertValues)
         return response
     } catch (e) {
         return e.detail.includes('username') ? {
@@ -18,15 +17,16 @@ export const insertUser = async (username, email, password) => {
     }
 }
 
-const selectUser = async (username, password) => {
+const validateUser = async (username, password) => {
     try {
-        const text = 'SELECT username FROM users WHERE username=$1 AND password=crypt($2, password)'
-        const values = [username, password]
-        const response = await client.query(text, values)
-        if (!response.rows.length) {
-            return 'Nombre de usuario o contraseña incorrecto'
+        const selectUserPwd = 'SELECT username FROM users WHERE username=$1 AND password=crypt($2, password)'
+        const selectUserPwdValues = [username, password]
+        const response = await client.query(selectUserPwd, selectUserPwdValues)
+        return !response.rows.length ? {
+            'message': 'Nombre de usuario o contraseña incorrecto'
+        } : {
+            'message': 'Sesión iniciada'
         }
-        return 'Sesión iniciada'
     } catch (e) {
         return { 'error': e.detail }
     }
@@ -34,13 +34,10 @@ const selectUser = async (username, password) => {
 
 export const findUser = async (username, password) => {
     try {
-        const text = 'SELECT username FROM users WHERE username=$1'
-        const value = [username]
-        const response = await client.query(text, value)
-        if (!response.rows.length) {
-            return 'Este nombre de usuario no existe'
-        }
-        return selectUser(username, password)
+        const selectUser = 'SELECT username FROM users WHERE username=$1'
+        const selectUserValue = [username]
+        const response = await client.query(selectUser, selectUserValue)
+        return !response.rows.length ? { 'message': 'Este nombre de usuario no existe' } : validateUser(username, password)
     } catch (e) {
         return { 'error': e.detail }
     }
