@@ -3,7 +3,7 @@ import express from 'express'
 import cors from 'cors'
 
 // import files
-import { createTables, deleteTables } from './database/db.tables'
+import { generateTables } from './models/generateTables'
 import userAuth_routes from './routes/user_auth.route'
 
 // initialization
@@ -21,6 +21,6 @@ app.get('/api', (req, res) => {
 // app.use('/api/docs', docs)
 app.use('/api/user', userAuth_routes)
 
-createTables()
+generateTables()
 
 export default app

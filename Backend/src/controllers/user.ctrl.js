@@ -1,8 +1,8 @@
-import { createUser, findUser } from '../database/db.queries'
+import { createUser, validateUser } from '../database/db.queries'
 
 export const login = async (req, res) => {
     const { username, password } = req.query
-    const response = await findUser(username, password)
+    const response = await validateUser(username, password)
     res.json(response)
 }
 
