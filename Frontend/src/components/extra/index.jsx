@@ -3,7 +3,7 @@ import styled from "styled-components";
 import  Imagen  from './form.png';
 
 const BoxContainer = styled.div`
-    width: 750px;
+    width: 650px;
     min-height: 550px;
     display: flex;
     justify-content: center;

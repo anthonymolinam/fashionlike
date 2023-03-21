@@ -1,11 +1,18 @@
 *{
   margin: 0;
-}
-
-body{
-  background-color: #fbfbfb;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 img{
   height: 500px;
+}
+
+.bg-image{
+  background-image: url('./assets/img/bg-login.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: none;
+  z-index: -1;
 }
