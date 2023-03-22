@@ -2,10 +2,13 @@
 import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
+import swaggerUi from 'swagger-ui-express'
 
 // import files
 import { generateTables, dropTables } from './database/generateTables'
-import userAuth_routes from './routes/user_auth.route'
+import routes from './routes/routes'
+import apidocs from './routes/api_docs'
+import { swaggerDocs } from './routes/api_docs'
 
 // initialization
 const app = express()
@@ -16,12 +19,14 @@ app.use(morgan('tiny'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// routes
+// api documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+
+// api routes
 app.get('/api', (req, res) => {
     res.json({ 'Message': 'base path' })
 })
-// app.use('/api/docs', docs)
-app.use('/api/user', userAuth_routes)
+app.use('/api', routes)
 
 generateTables()
 

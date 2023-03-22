@@ -4,8 +4,8 @@ import { Router } from 'express'
 import * as userCtrl from '../controllers/user.ctrl.js'
 
 const router = Router()
-
+// user Authentication
 router.post('/login', userCtrl.login)
-router.post('/signup', userCtrl.signup)
+    .post('/signup', userCtrl.signup)
 
 export default router;
