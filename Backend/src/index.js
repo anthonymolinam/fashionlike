@@ -1,7 +1,7 @@
-import { config } from 'dotenv'
+const { config } = require('dotenv')
 config()
 
-import app from './app'
+const app = require('./app')
 
 async function main(port) {
     await app.listen(port, () => {

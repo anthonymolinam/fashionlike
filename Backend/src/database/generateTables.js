@@ -1,7 +1,7 @@
-import { userModel, publicationModel } from "./models"
-import client from "./db.connect"
+const { userModel, publicationModel } = require("./models")
+const client = require("./db.connect")
 
-export const generateTables = async () => {
+const generateTables = async () => {
     try {
         await client.query(userModel)
         await client.query(publicationModel)
@@ -11,11 +11,16 @@ export const generateTables = async () => {
     }
 }
 
-export const dropTables = async () => {
+const dropTables = async () => {
     try {
         await client.query('DROP TABLE publication, users')
         console.log('Tables has been deleted');
     } catch (error) {
         console.error(error)
     }
+}
+
+module.exports = {
+    generateTables,
+    dropTables
 }

@@ -1,6 +1,6 @@
-import client from "./db.connect";
+const client = require("./db.connect")
 
-export const createUser = async (username, email, password) => {
+const createUser = async (username, email, password) => {
     try {
         const text = "INSERT INTO users(username, email, password) VALUES($1, $2, crypt($3, gen_salt('bf')))"
         const values = [username, email, password]
@@ -17,7 +17,7 @@ export const createUser = async (username, email, password) => {
     }
 }
 
-export const validateUser = async (username, password) => {
+const validateUser = async (username, password) => {
     const finduser = await findUser(username)
     if (finduser == 'found') {
         try {
@@ -36,7 +36,7 @@ export const validateUser = async (username, password) => {
     return finduser
 }
 
-export const findUser = async (username) => {
+const findUser = async (username) => {
     try {
         const text = 'SELECT username FROM users WHERE username=$1'
         const value = [username]
@@ -48,4 +48,10 @@ export const findUser = async (username) => {
     } catch (e) {
         return { 'error': e.detail }
     }
+}
+
+module.exports = {
+    createUser,
+    validateUser,
+    findUser
 }

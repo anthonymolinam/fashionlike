@@ -1,7 +1,7 @@
-import { config } from 'dotenv'
+const { config } = require('dotenv')
 config()
 
-import { Client } from 'pg'
+const { Client } = require('pg')
 
 const client = new Client({
     databse_url: process.env.PGDATABASE_URL,
@@ -13,4 +13,4 @@ const client = new Client({
 })
 client.connect()
 
-export default client
+module.exports = client
