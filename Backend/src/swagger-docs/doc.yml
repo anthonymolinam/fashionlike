@@ -1,0 +1,57 @@
+/api/user/login:
+  post:
+    tags:
+      - Users
+    description: Inicio de sesion de usuario
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: Nombre de usuario
+                example: gonza
+              password:
+                type: string
+                description: Contraseña
+                example: gonza123
+    responses:
+      200:
+        description: Succesfull request
+      404:
+        description: User not found
+
+/api/user/signup:
+  post:
+    tags:
+      - Users
+    description: registro de usuario
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: Nombre de usuario
+                example: example
+              email:
+                type: string
+                description: Correo electronico
+                example: example@example.com
+              password1:
+                type: string
+                description: Contraseña
+                example: example123
+              password2:
+                type: string
+                description: Contraseña
+                example: example123
+    responses:
+      200:
+        description: Succesfull request

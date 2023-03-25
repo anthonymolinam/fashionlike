@@ -1,31 +1,23 @@
 // import dependencies
-const express = require('express')
-const cors = require('cors')
-const morgan = require('morgan')
+const express = require("express")
+const cors = require("cors")
+const morgan = require("morgan")
 
-// import files
-const { generateTables, dropTables } = require('./database/generateTables')
-const routes = require('./routes/routes')
-const { swaggerServe, swaggerSetUp } = require('./routes/api_docs')
+// import routes
+const userRoutes = require("./routes/user_auth")
+const testRouter = require("./routes/test")
 
 // initialization
 const app = express()
 
-// middlewares
+// Middlewares dependencies
 app.use(cors())
-app.use(morgan('tiny'))
+app.use(morgan("tiny"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// api documentation
-app.use('/api-docs', swaggerServe, swaggerSetUp)
-
-// api routes
-app.get('/api', (req, res) => {
-    res.json({ 'Message': 'base path' })
-})
-app.use('/api', routes)
-
-generateTables()
+// API routes middlewares
+app.use("/api/user", userRoutes)
+app.use("/api/test", testRouter)
 
 module.exports = app

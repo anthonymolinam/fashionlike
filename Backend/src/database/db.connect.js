@@ -1,7 +1,7 @@
-const { config } = require('dotenv')
+const { config } = require("dotenv")
 config()
 
-const { Client } = require('pg')
+const { Client } = require("pg")
 
 const client = new Client({
     databse_url: process.env.PGDATABASE_URL,
