@@ -14,12 +14,12 @@ const swaggerSpec = {
             version
         },
         servers: [{
-            url: `http://localhost:${process.env.PORT}`,
+            url: `http://localhost:${process.env.PORT}/api`,
         }]
     },
     apis: [
         `${path.join(__dirname, "../routes/*.js")}`,
-        `${path.join(__dirname, "../swagger-docs/doc.yml")}`
+        `${path.join(__dirname, "../doc/user.doc.yml")}`
     ],
 };
 

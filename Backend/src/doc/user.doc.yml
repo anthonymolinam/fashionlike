@@ -1,7 +1,7 @@
-/api/user/login:
+/user/login:
   post:
     tags:
-      - Users
+      - User
     description: Inicio de sesion de usuario
     requestBody:
       required: true
@@ -24,10 +24,10 @@
       404:
         description: User not found
 
-/api/user/signup:
+/user/signup:
   post:
     tags:
-      - Users
+      - User
     description: registro de usuario
     requestBody:
       required: true
@@ -55,3 +55,18 @@
     responses:
       200:
         description: Succesfull request
+
+/user/{username}:
+  get:
+    tags:
+      - User
+    parameters:
+      - in: path
+        name: username
+        type: string
+        required: true
+        description: Nombre de usuario para obtener usuario
+        example: gonza
+    responses:
+      200:
+        description: OK!
