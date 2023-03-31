@@ -1,7 +1,7 @@
 /user/login:
   post:
     tags:
-      - User
+      - Auth
     description: Inicio de sesion de usuario
     requestBody:
       required: true
@@ -20,14 +20,16 @@
                 example: gonza123
     responses:
       200:
-        description: Succesfull request
+        description: OK
+      401:
+        description: Unauthorized
       404:
-        description: User not found
+        description: Not Found
 
 /user/signup:
   post:
     tags:
-      - User
+      - Auth
     description: registro de usuario
     requestBody:
       required: true
@@ -53,13 +55,25 @@
                 description: Contraseña
                 example: example123
     responses:
+      201:
+        description: Created
+      409:
+        description: Conflict
+
+/user:
+  get:
+    tags:
+      - Queries
+    description: Obtener todos los usuarios
+    responses:
       200:
-        description: Succesfull request
+        description: OK
 
 /user/{username}:
   get:
     tags:
-      - User
+      - Queries
+    description: Busqueda de usuario
     parameters:
       - in: path
         name: username
@@ -69,4 +83,35 @@
         example: gonza
     responses:
       200:
-        description: OK!
+        description: OK
+      404:
+        description: Not Found
+  put:
+    tags:
+      - Request
+    description: Cambio de contraseña de usuario
+    parameters:
+      - in: path
+        name: username
+        type: string
+        required: true
+        description: Nombre de usuario al cual cambiar contraseña
+        example: gonza
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              password1:
+                type: string
+                description: Contraseña
+                example: example123
+              password2:
+                type: string
+                description: Contraseña
+                example: example123
+    responses:
+      200:
+        description: OK

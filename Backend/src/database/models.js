@@ -1,10 +1,10 @@
 const userModel = "CREATE TABLE IF NOT EXISTS users(" +
     "id SERIAL PRIMARY KEY," +
-    "token VARCHAR NOT NULL DEFAULT 'Unknow'," +
     "username VARCHAR(64) UNIQUE," +
     "email VARCHAR(255) UNIQUE," +
     "password VARCHAR NOT NULL," +
     "verified BOOLEAN DEFAULT FALSE," +
+    "role VARCHAR DEFAULT 'user'," +
     "daterelease DATE NOT NULL DEFAULT CURRENT_DATE," +
     "dateupdate DATE NOT NULL DEFAULT CURRENT_DATE)"
 
