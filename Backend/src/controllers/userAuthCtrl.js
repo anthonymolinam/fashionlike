@@ -1,36 +1,46 @@
-const { createUser, validateUser, findById } = require('../database/db.queries')
+// const { createUser, validateUser, findById, updateTkn } = require('../database/db.queries')
 const { signToken, verifyToken } = require('./generateToken')
+const User = require('../models/user')
 
 // TODO: Authentication
 const signup = async (req, res) => {
     try {
         const { username, email, password1, password2 } = req.body
         if (password1 === password2) {
-            const response = await createUser(username, email, password1)
-            res.status(200).json(response)
+            await User.create({
+                username,
+                email,
+                password: password1
+            })
+            res.status(201).json({ message: "User has been created" })
         } else {
-            res.json({ "message": "Las contraseñas no coinciden" })
+            res.status(400).json({ message: "Passwords do not match" })
         }
     } catch (error) {
-        res.json(error)
+        res.status(409).json({
+            name: error.name,
+            errors: {
+                message: error.errors[0]["message"],
+                type: error.errors[0]["type"],
+                path: error.errors[0]["path"],
+                value: error.errors[0]["value"]
+            },
+            detail: error.parent.detail
+        })
     }
 }
 
 const login = async (req, res) => {
     try {
         const { username, password } = req.body
-        const response = await validateUser(username, password)
-        if (!response.rowCount)
-            res.status(401).json({
-                "message": "Nombre de usuario o contraseña incorrecto"
-            })
-        else {
-            const user = response.rows[0]
-            const tokenSession = await signToken(user)
-            res.status(200).json({ data: user, tokenSession })
+        const user = await User.findOne({ where: { username, password } })
+        if (user) {
+            res.status(200).json(user)
+        } else {
+            res.status(401).json({ error: "Username or password is incorrect" })
         }
     } catch (error) {
-        res.json(error)
+        res.status(400).json(error)
     }
 }
 
@@ -39,32 +49,28 @@ const checkAuth = async (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ').pop()
         const tokenData = await verifyToken(token)
-        console.log(tokenData);
         if (tokenData.id) {
             next()
         } else {
-            res.status(409).json({ error: "No tienes permisos" })
+            res.status(403).json({ error: "you don't have permissions" })
         }
     } catch (error) {
-        console.error(error)
-        res.status(409).json({ error: "No tienes permisos" })
+        res.json(error)
     }
 }
 
 const checkRoleAuth = (roles) => async (req, res, next) => {
     try {
+
         const token = req.headers.authorization.split(' ').pop()
         const tokenData = await verifyToken(token)
-        const userData = await findById(tokenData.id)
-        console.log([].concat(roles).includes(userData.rows[0].role));
-        if ([].concat(roles).includes(userData.rows[0].role)) {
+        if ([].concat(roles).includes()) {
             next()
         } else {
-            res.status(409).json({ error: "No tienes permisos" })
+            res.status(403).json({ error: "you don't have permissions" })
         }
     } catch (error) {
-        console.error(error)
-        res.status(409).json({ error: "No tienes permisos" })
+        res.json(error)
     }
 }
 

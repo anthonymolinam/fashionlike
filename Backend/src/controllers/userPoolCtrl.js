@@ -1,55 +1,36 @@
-const { getAllUsers, findUser, updatePwd } = require('../database/db.queries')
+const User = require('../models/user')
 
 // TODO: Queries
 const getUsers = async (req, res) => {
     try {
-        const users = await getAllUsers()
-        if (users.rows) {
-            res.status(200).json(users.rows)
-        } else {
-            res.status(404).json({ error: "Users Not Found" })
-        }
+        const users = await User.findAll()
+        res.status(200).json(users)
     } catch (error) {
-        res.json(error)
+        res.status(400).json(error)
     }
 }
 
-const findOneUser = async (req, res) => {
+const getUser = async (req, res) => {
     try {
         const { username } = req.params
-        const user = await findUser(username)
-        user.rowCount ?
-            res.status(200).json(user.rows[0]) :
+        const user = await User.findOne({ where: { username } })
+        if (user) {
+            res.status(200).json(user)
+        } else {
             res.status(404).json({ error: "User Not Found" })
+        }
     } catch (error) {
         res.json(error)
     }
 }
 
 // TODO: Requests
-const updatePassword = async (req, res) => {
-    try {
-        const { password1, password2 } = req.body
-        const { username } = req.params
-        const finduser = await findUser(username)
+const updatePwd = async (req, res) => {
 
-        if (finduser.rowCount) {
-            if (password1 === password2) {
-                const response = await updatePwd(username, password1)
-                res.status(200).json(response.rows[0])
-            } else {
-                res.json({ "message": "Las contraseñas no coinciden" })
-            }
-        } else {
-            res.status(404).json({ error: "User Not Found" })
-        }
-    } catch (error) {
-        res.json(error)
-    }
 }
 
 module.exports = {
     getUsers,
-    findOneUser,
-    updatePassword
+    getUser,
+    updatePwd
 }

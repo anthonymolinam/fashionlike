@@ -21,10 +21,10 @@
     responses:
       200:
         description: OK
+      400:
+        description: Bad request
       401:
         description: Unauthorized
-      404:
-        description: Not Found
 
 /user/signup:
   post:
@@ -57,10 +57,12 @@
     responses:
       201:
         description: Created
+      400:
+        description: Bad Request
       409:
         description: Conflict
 
-/user:
+/users:
   get:
     tags:
       - Queries
@@ -68,8 +70,10 @@
     responses:
       200:
         description: OK
+      401:
+        description: Unauthorized
 
-/user/{username}:
+/users/{username}:
   get:
     tags:
       - Queries
@@ -86,17 +90,12 @@
         description: OK
       404:
         description: Not Found
+
+/users/changepwd:
   put:
     tags:
       - Request
-    description: Cambio de contraseña de usuario
-    parameters:
-      - in: path
-        name: username
-        type: string
-        required: true
-        description: Nombre de usuario al cual cambiar contraseña
-        example: gonza
+    description: Cambio de contraseña
     requestBody:
       required: true
       content:
@@ -115,3 +114,5 @@
     responses:
       200:
         description: OK
+      400:
+        description: Bad request

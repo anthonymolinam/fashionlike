@@ -5,10 +5,10 @@ const { checkAuth, checkRoleAuth } = require("../../controllers/userAuthCtrl.js"
 const router = Router()
 
 // TODO: Queries
-router.get("", checkAuth, checkRoleAuth(['admin']), userPoolCtrl.getUsers)
-router.get("/:username", userPoolCtrl.findOneUser)
+router.get("", userPoolCtrl.getUsers)
+router.get("/:username", userPoolCtrl.getUser)
 
 // TODO: Requests
-router.put("/:username", userPoolCtrl.updatePassword)
+router.put("/:username", userPoolCtrl.updatePwd)
 
 module.exports = router

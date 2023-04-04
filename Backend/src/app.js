@@ -18,6 +18,6 @@ app.use(express.urlencoded({ extended: false }))
 
 // API routes
 app.use("/api/user", userAuth)
-app.use("/api/user", userPool)
+app.use("/api/users", userPool)
 
 module.exports = app
