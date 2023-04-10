@@ -4,7 +4,7 @@ const { checkAuth, checkRoleAuth } = require("../utils/check");
 
 const router = Router();
 
-router.get("/list", checkAuth, checkRoleAuth(['admin', 'user']), userCtrl.getAllUsers);
+router.get("/list", checkAuth, checkRoleAuth(['admin']), userCtrl.getAllUsers);
 router.get("/:username", userCtrl.getUser);
 
 router.put("/pwd", userCtrl.changePwd);

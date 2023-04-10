@@ -29,11 +29,7 @@ const User = sequelize.define("user", {
     role: {
         type: DataTypes.STRING,
         defaultValue: "user"
-    },
-    token: {
-        type: DataTypes.STRING,
-        defaultValue: "undefined"
-    },
+    }
 }, {
     freezeTableName: true
 });

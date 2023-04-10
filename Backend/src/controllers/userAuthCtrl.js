@@ -17,7 +17,12 @@ const signup = async (req, res) => {
             res.status(400).json({ message: "Passwords do not match" });
         }
     } catch (error) {
-        res.status(409).json(error);
+        res.status(409).json({
+            name: error.name,
+            message: error.errors[0].message,
+            type: error.errors[0].type,
+            detail: error.parent.detail
+        });
     }
 }
 
@@ -28,15 +33,12 @@ const login = async (req, res) => {
         if (user) {
             if (await comparePwd(password, user.password)) {
                 const tokenSession = await signToken(user);
-                res.status(200).json({
-                    data: user,
-                    tokenSession
-                });
+                res.status(200).json({ user, tokenSession });
             } else {
                 res.status(400).json({ error: "Password is incorrect" });
             }
         } else {
-            res.status(404).json({ error: "User Not Found" });
+            res.status(404).json({ error: "This username does not exist" });
         }
     } catch (error) {
         res.status(400).json(error);
