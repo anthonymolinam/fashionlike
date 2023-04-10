@@ -1,0 +1,54 @@
+/user/list:
+  get:
+    tags:
+      - User
+    description: Obtener todos los usuarios
+    responses:
+      200:
+        description: OK
+      401:
+        description: Unauthorized
+
+/user/{username}:
+  get:
+    tags:
+      - User
+    description: Busqueda de usuario
+    parameters:
+      - in: path
+        name: username
+        type: string
+        required: true
+        description: Nombre de usuario para obtener sus datos
+        example: gonza
+    responses:
+      200:
+        description: OK
+      404:
+        description: Not Found
+
+/user/changepwd:
+  put:
+    tags:
+      - User
+    description: Cambio de contraseña
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              password1:
+                type: string
+                description: Contraseña
+                example: example123
+              password2:
+                type: string
+                description: Contraseña
+                example: example123
+    responses:
+      200:
+        description: OK
+      400:
+        description: Bad request
