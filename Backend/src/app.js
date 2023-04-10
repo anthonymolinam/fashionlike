@@ -20,4 +20,4 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/v1/auth", userAuth);
 app.use("/v1/user", userRoute);
 
-module.exports = app
+module.exports = app;

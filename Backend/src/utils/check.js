@@ -16,7 +16,6 @@ const checkAuth = async (req, res, next) => {
 
 const checkRoleAuth = (roles) => async (req, res, next) => {
     try {
-
         const token = req.headers.authorization.split(' ').pop();
         const tokenData = await verifyToken(token);
         if ([].concat(roles).includes(tokenData.role)) {

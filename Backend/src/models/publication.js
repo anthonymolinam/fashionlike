@@ -14,4 +14,4 @@ const Publication = sequelize.define('publication', {
     freezeTableName: true
 });
 
-module.exports = Publication
+module.exports = Publication;

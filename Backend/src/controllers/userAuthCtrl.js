@@ -1,11 +1,11 @@
 const User = require('../models/user');
 const { signToken } = require('../utils/generateToken');
-const { encrypt, comparePwd } = require('../utils/encryptPassword')
+const { encrypt, comparePwd } = require('../utils/encryptPassword');
 
 // TODO: Authentication
 const signup = async (req, res) => {
     try {
-        const { username, email, password1, password2 } = req.body
+        const { username, email, password1, password2 } = req.body;
         if (password1 === password2) {
             await User.create({
                 username,

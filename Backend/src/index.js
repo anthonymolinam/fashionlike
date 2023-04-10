@@ -1,10 +1,10 @@
-require("dotenv").config()
+require("dotenv").config();
 
 const swaggerDocs = require("./doc/swagger");
 const app = require("./app");
 const port = process.env.PORT || 4000;
 
-const sequelize = require('./database/db.connection')
+const sequelize = require('./database/db.connection');
 
 async function main() {
     try {
@@ -18,4 +18,4 @@ async function main() {
     }
 }
 
-main()
+main();

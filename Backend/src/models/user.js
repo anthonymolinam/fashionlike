@@ -1,6 +1,6 @@
-const { DataTypes } = require('sequelize')
-const sequelize = require('../database/db.connection')
-const Pub = require('./publication')
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database/db.connection');
+const Pub = require('./publication');
 
 const User = sequelize.define("user", {
     id: {
@@ -39,4 +39,4 @@ Pub.belongsTo(User, {
     targetId: 'id'
 });
 
-module.exports = User
+module.exports = User;
