@@ -1,7 +1,7 @@
 const User = require('../models/user')
 
 // TODO: Queries
-const getUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
     try {
         const users = await User.findAll()
         res.status(200).json(users)
@@ -25,12 +25,12 @@ const getUser = async (req, res) => {
 }
 
 // TODO: Requests
-const updatePwd = async (req, res) => {
+const changePwd = async (req, res) => {
 
 }
 
 module.exports = {
-    getUsers,
+    getAllUsers,
     getUser,
-    updatePwd
+    changePwd
 }

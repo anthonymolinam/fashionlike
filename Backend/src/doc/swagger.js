@@ -11,7 +11,7 @@ const swaggerSpec = {
             version
         },
         servers: [{
-            url: `http://localhost:${process.env.PORT}/api`,
+            url: `http://localhost:${process.env.PORT}/v1`,
         }]
     },
     apis: [

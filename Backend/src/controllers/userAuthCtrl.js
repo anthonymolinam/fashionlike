@@ -1,6 +1,6 @@
-// const { createUser, validateUser, findById, updateTkn } = require('../database/db.queries')
-const { signToken, verifyToken } = require('./generateToken')
-const User = require('../models/user')
+const User = require('../models/user');
+const { signToken } = require('../utils/generateToken');
+const { encrypt, comparePwd } = require('../utils/encryptPassword')
 
 // TODO: Authentication
 const signup = async (req, res) => {
@@ -10,73 +10,40 @@ const signup = async (req, res) => {
             await User.create({
                 username,
                 email,
-                password: password1
-            })
-            res.status(201).json({ message: "User has been created" })
+                password: await encrypt(password1)
+            });
+            res.status(201).json({ message: "User has been created" });
         } else {
-            res.status(400).json({ message: "Passwords do not match" })
+            res.status(400).json({ message: "Passwords do not match" });
         }
     } catch (error) {
-        res.status(409).json({
-            name: error.name,
-            errors: {
-                message: error.errors[0]["message"],
-                type: error.errors[0]["type"],
-                path: error.errors[0]["path"],
-                value: error.errors[0]["value"]
-            },
-            detail: error.parent.detail
-        })
+        res.status(409).json(error);
     }
 }
 
 const login = async (req, res) => {
     try {
-        const { username, password } = req.body
-        const user = await User.findOne({ where: { username, password } })
+        const { username, password } = req.body;
+        const user = await User.findOne({ where: { username } });
         if (user) {
-            res.status(200).json(user)
+            if (await comparePwd(password, user.password)) {
+                const tokenSession = await signToken(user);
+                res.status(200).json({
+                    data: user,
+                    tokenSession
+                });
+            } else {
+                res.status(400).json({ error: "Password is incorrect" });
+            }
         } else {
-            res.status(401).json({ error: "Username or password is incorrect" })
+            res.status(404).json({ error: "User Not Found" });
         }
     } catch (error) {
-        res.status(400).json(error)
-    }
-}
-
-// TODO: Authorization
-const checkAuth = async (req, res, next) => {
-    try {
-        const token = req.headers.authorization.split(' ').pop()
-        const tokenData = await verifyToken(token)
-        if (tokenData.id) {
-            next()
-        } else {
-            res.status(403).json({ error: "you don't have permissions" })
-        }
-    } catch (error) {
-        res.json(error)
-    }
-}
-
-const checkRoleAuth = (roles) => async (req, res, next) => {
-    try {
-
-        const token = req.headers.authorization.split(' ').pop()
-        const tokenData = await verifyToken(token)
-        if ([].concat(roles).includes()) {
-            next()
-        } else {
-            res.status(403).json({ error: "you don't have permissions" })
-        }
-    } catch (error) {
-        res.json(error)
+        res.status(400).json(error);
     }
 }
 
 module.exports = {
     login,
-    signup,
-    checkAuth,
-    checkRoleAuth
+    signup
 }

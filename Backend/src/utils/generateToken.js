@@ -18,12 +18,7 @@ const verifyToken = async (token) => {
     }
 }
 
-const decodeToken = async () => {
-
-}
-
 module.exports = {
     signToken,
-    verifyToken,
-    decodeToken
+    verifyToken
 }

@@ -1,4 +1,4 @@
-/user/login:
+/auth/login:
   post:
     tags:
       - Auth
@@ -23,10 +23,8 @@
         description: OK
       400:
         description: Bad request
-      401:
-        description: Unauthorized
 
-/user/signup:
+/auth/signup:
   post:
     tags:
       - Auth
@@ -62,10 +60,10 @@
       409:
         description: Conflict
 
-/users:
+/user/list:
   get:
     tags:
-      - Queries
+      - User
     description: Obtener todos los usuarios
     responses:
       200:
@@ -73,17 +71,17 @@
       401:
         description: Unauthorized
 
-/users/{username}:
+/user/{username}:
   get:
     tags:
-      - Queries
+      - User
     description: Busqueda de usuario
     parameters:
       - in: path
         name: username
         type: string
         required: true
-        description: Nombre de usuario para obtener usuario
+        description: Nombre de usuario para obtener sus datos
         example: gonza
     responses:
       200:
@@ -91,10 +89,10 @@
       404:
         description: Not Found
 
-/users/changepwd:
+/user/changepwd:
   put:
     tags:
-      - Request
+      - User
     description: Cambio de contraseña
     requestBody:
       required: true
