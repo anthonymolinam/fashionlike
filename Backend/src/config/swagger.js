@@ -11,12 +11,12 @@ const swaggerSpec = {
             version
         },
         servers: [{
-            url: `http://localhost:${process.env.PORT}/v1`,
+            url: `http://localhost:${process.env.PORT}/api`,
             description: 'Development Server',
         }]
     },
     apis: [
-        `${path.join(__dirname, "../docs/yaml/*.yaml")}`
+        `${path.join(__dirname, "../docs/*.yaml")}`
     ],
 }
 

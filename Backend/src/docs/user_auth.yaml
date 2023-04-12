@@ -1,4 +1,4 @@
-/auth/login:
+/login:
   post:
     tags:
       - Auth
@@ -24,7 +24,7 @@
       400:
         description: Bad request
 
-/auth/signup:
+/signup:
   post:
     tags:
       - Auth

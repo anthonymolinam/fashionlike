@@ -1,6 +1,6 @@
 const User = require('../models/user');
-const { signToken } = require('../utils/generateToken');
-const { encrypt, comparePwd } = require('../utils/encryptPassword');
+const { signToken } = require('../helpers/generateToken');
+const { encrypt, comparePwd } = require('../helpers/encryptPassword');
 
 // TODO: Authentication
 const signup = async (req, res) => {
@@ -35,7 +35,7 @@ const login = async (req, res) => {
                 const tokenSession = await signToken(user);
                 res.status(200).json({ user, tokenSession });
             } else {
-                res.status(400).json({ error: "Password is incorrect" });
+                res.status(401).json({ error: "Password is incorrect" });
             }
         } else {
             res.status(404).json({ error: "This username does not exist" });
