@@ -24,7 +24,7 @@ export const MutedLink = styled.a`
 
 export const BoldLink = styled.a`
     font-size: 13px;
-    color: rgb(239,169,174);
+    color: #cf9885;
     font-weight: 600;
     text-decoration: none;
     margin: 0 4px;
@@ -47,7 +47,7 @@ export const Input = styled.input`
 
     &:focus {
         outline: none;
-        border: 3px solid rgb(239,169,174);
+        border: 3px solid #cf9885;
     }
 `;
 
@@ -61,8 +61,7 @@ export const SubmitButton = styled.button`
     border-radius: 100px;
     cursor: pointer;
     transition: all, 240ms ease-in-out;
-    background: rgb(239,169,174);
-    background: linear-gradient(90deg, rgba(239,169,174,1) 20%, rgba(229,83,129,1) 100%);
+    background: #cf9885;
 
     &:hover {
         filter: brightness(1.1);

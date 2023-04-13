@@ -9,10 +9,6 @@ img{
   height: 500px;
 }
 
-.bg-image{
-  background-image: url('./assets/img/bg-login.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: none;
-  z-index: -1;
+body{
+  background-color: #F5DFC7;
 }

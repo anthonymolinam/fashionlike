@@ -15,10 +15,10 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  return <div class="bg-image"><AppContainer>
+  return<AppContainer>
   <ExtraBox/>
   <AccountBox/>
-  </AppContainer></div>;
+  </AppContainer>;
 }
 
 export default App;
