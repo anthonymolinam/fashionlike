@@ -5,7 +5,7 @@ const signToken = async (user) => {
         id: user.id,
         role: user.role
     }, process.env.JWT_SECRET, {
-        expiresIn: "24h"
+        expiresIn: '24h'
     });
 }
 

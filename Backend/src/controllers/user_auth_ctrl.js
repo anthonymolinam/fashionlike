@@ -12,9 +12,9 @@ const signup = async (req, res) => {
                 email,
                 password: await encrypt(password1)
             });
-            res.status(201).json({ message: "User has been created" });
+            res.status(201).json({ message: 'User has been created' });
         } else {
-            res.status(400).json({ message: "Passwords do not match" });
+            res.status(400).json({ error: 'Passwords do not match' });
         }
     } catch (error) {
         res.status(409).json({
@@ -35,10 +35,10 @@ const login = async (req, res) => {
                 const tokenSession = await signToken(user);
                 res.status(200).json({ user, tokenSession });
             } else {
-                res.status(401).json({ error: "Password is incorrect" });
+                res.status(401).json({ error: 'Password is incorrect' });
             }
         } else {
-            res.status(404).json({ error: "This username does not exist" });
+            res.status(404).json({ error: 'This username does not exist' });
         }
     } catch (error) {
         res.status(400).json(error);

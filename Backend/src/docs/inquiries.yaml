@@ -3,13 +3,15 @@
     tags:
       - Inquiries
     description: Obtener todos los usuarios
+    security:
+      - bearerAuth: []
     responses:
       200:
-        description: OK
+        description: 'OK: La solicitud ha tenido éxito.'
       401:
-        description: Unauthorized
+        description: 'Unauthorized: Es necesario autenticar para obtener la respuesta solicitada.'
       403:
-        description: Forbidden
+        description: 'Forbidden: El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.'
 
 /user/{username}:
   get:
@@ -17,23 +19,22 @@
       - Inquiries
     description: Busqueda de usuario
     parameters:
-      - in: path
-        name: username
+      - name: username
+        in: path
         type: string
         required: true
         description: Nombre de usuario para obtener sus datos
-        example: gonza
     responses:
       200:
-        description: OK
+        description: 'OK: La solicitud ha tenido éxito.'
       404:
-        description: Not Found
+        description: 'Not Found: El servidor no pudo encontrar el contenido solicitado.'
 
-/changepwd:
+/update-password:
   put:
     tags:
       - Inquiries
-    description: Cambio de contraseña
+    description: Cambio de contraseña para usuarios con sesión iniciada.
     requestBody:
       required: true
       content:
@@ -43,14 +44,43 @@
             properties:
               password1:
                 type: string
-                description: Contraseña
-                example: example123
+                description: Contraseña nueva
               password2:
                 type: string
-                description: Contraseña
-                example: example123
+                description: Confirmar contraseña nueva
+              currentPassword:
+                type: string
+                description: Contraseña actual
+    security:
+      - bearerAuth: []
     responses:
       200:
-        description: OK
+        description: 'OK: La solicitud ha tenido éxito.'
       400:
-        description: Bad request
+        description: 'Bad request: Esta respuesta significa que el servidor no pudo interpretar la solicitud dada una sintaxis inválida.'
+
+/forgot-password:
+  put:
+    tags:
+      - Inquiries
+    description: Cambio de contraseña para usuarios que olvidaron su contraseña.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              password1:
+                type: string
+                description: Contraseña nueva
+              password2:
+                type: string
+                description: Confirmar contraseña nueva
+    security:
+      - bearerAuth: []
+    responses:
+      200:
+        description: 'OK: La solicitud ha tenido éxito'
+      400:
+        description: 'Bad request: Esta respuesta significa que el servidor no pudo interpretar la solicitud dada una sintaxis inválida.'

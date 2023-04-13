@@ -2,7 +2,7 @@
   post:
     tags:
       - Auth
-    description: Inicio de sesion de usuario
+    description: Inicio de sesion de usuario.
     requestBody:
       required: true
       content:
@@ -12,23 +12,21 @@
             properties:
               username:
                 type: string
-                description: Nombre de usuario
-                example: gonza
+                description: Nombre de usuario.
               password:
                 type: string
                 description: Contraseña
-                example: gonza123
     responses:
       200:
-        description: OK
+        description: 'OK: La solicitud ha tenido éxito.'
       400:
-        description: Bad request
+        description: 'Bad request: Esta respuesta significa que el servidor no pudo interpretar la solicitud dada una sintaxis inválida.'
 
 /signup:
   post:
     tags:
       - Auth
-    description: registro de usuario
+    description: Registro para nuevos usuarios.
     requestBody:
       required: true
       content:
@@ -43,19 +41,17 @@
               email:
                 type: string
                 description: Correo electronico
-                example: example@example.com
+                example: example@email.com
               password1:
                 type: string
                 description: Contraseña
-                example: example123
               password2:
                 type: string
-                description: Contraseña
-                example: example123
+                description: Confirmar contraseña
     responses:
       201:
-        description: Created
+        description: 'Created: La solicitud ha tenido éxito y se ha creado un nuevo recurso como resultado de ello.'
       400:
-        description: Bad Request
+        description: 'Bad Request: Esta respuesta significa que el servidor no pudo interpretar la solicitud dada una sintaxis inválida.'
       409:
-        description: Conflict
+        description: 'Conflict: Esta respuesta puede ser enviada cuando una petición tiene conflicto con el estado actual del servidor.'

@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const Pub = require('./publication');
 
-const User = sequelize.define("user", {
+const User = sequelize.define('user', {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -28,7 +28,7 @@ const User = sequelize.define("user", {
     },
     role: {
         type: DataTypes.STRING,
-        defaultValue: "user"
+        defaultValue: 'user'
     }
 }, {
     freezeTableName: true

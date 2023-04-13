@@ -1,21 +1,16 @@
-require("dotenv").config();
 const sequelize = require('./config/database');
-const swaggerDocs = require("./config/swagger");
+const swaggerDocs = require('./config/swagger');
+require('dotenv').config()
 
-const app = require("./app");
-const port = process.env.PORT || 4000;
+const app = require('./app');
+const port = process.env.PORT;
 
-
-async function main() {
+app.listen(port, async () => {
+    console.log(`\nServer is on`);
     try {
         await sequelize.sync();
-        app.listen(port, () => {
-            console.log(`\nServer is on`);
-            swaggerDocs(app, port)
-        })
+        swaggerDocs(app, port)
     } catch (error) {
         console.error('Unable to connect to the database:', error);
     }
-}
-
-main();
+});
