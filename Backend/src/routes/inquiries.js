@@ -6,6 +6,6 @@ router.get('/allusers', checkRoleAuth(['admin']), userCtrl.getAllUsers);
 router.get('/user/:username', userCtrl.getUser);
 
 router.put('/update-password', checkRoleAuth(['admin', 'user']), userCtrl.changePwd)
-router.put('/forgot-password', checkRoleAuth(['user']), userCtrl.changePwd);
+router.put('/forgot-password', checkAuth, userCtrl.changePwd);
 
 module.exports = router;

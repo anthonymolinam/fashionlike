@@ -8,10 +8,14 @@
     responses:
       200:
         description: 'OK: La solicitud ha tenido éxito.'
+      400:
+        description: 'Bad request: Esta respuesta significa que el servidor no pudo interpretar la solicitud dada una sintaxis inválida.'
       401:
         description: 'Unauthorized: Es necesario autenticar para obtener la respuesta solicitada.'
-      403:
+      403: 
         description: 'Forbidden: El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.'
+      404:
+        description: 'Not Found: El servidor no pudo encontrar el contenido solicitado.'
 
 /user/{username}:
   get:
@@ -27,6 +31,8 @@
     responses:
       200:
         description: 'OK: La solicitud ha tenido éxito.'
+      400:
+        description: 'Bad request: Esta respuesta significa que el servidor no pudo interpretar la solicitud dada una sintaxis inválida.'
       404:
         description: 'Not Found: El servidor no pudo encontrar el contenido solicitado.'
 
@@ -58,6 +64,8 @@
         description: 'OK: La solicitud ha tenido éxito.'
       400:
         description: 'Bad request: Esta respuesta significa que el servidor no pudo interpretar la solicitud dada una sintaxis inválida.'
+      500:
+        description: 'El servidor ha encontrado una situación que no sabe cómo manejarla.'
 
 /forgot-password:
   put:
@@ -84,3 +92,5 @@
         description: 'OK: La solicitud ha tenido éxito'
       400:
         description: 'Bad request: Esta respuesta significa que el servidor no pudo interpretar la solicitud dada una sintaxis inválida.'
+      500:
+        description: 'El servidor ha encontrado una situación que no sabe cómo manejarla.'

@@ -1,16 +1,20 @@
 const User = require('../models/user');
 const { signToken } = require('../helpers/generateToken');
-const { encrypt, comparePwd } = require('../helpers/encryptPassword');
+const { hashPassword, comparePassword } = require('../helpers/encryptPassword');
+const zxcvbn = require('zxcvbn');
 
 // TODO: Authentication
 const signup = async (req, res) => {
     try {
         const { username, email, password1, password2 } = req.body;
+        if (zxcvbn(password1).score < 3) {
+            return res.status(400).json({ error: 'Password is too weak' });
+        }
         if (password1 === password2) {
             await User.create({
                 username,
                 email,
-                password: await encrypt(password1)
+                password: await hashPassword(password1)
             });
             res.status(201).json({ message: 'User has been created' });
         } else {
@@ -30,18 +34,14 @@ const login = async (req, res) => {
     try {
         const { username, password } = req.body;
         const user = await User.findOne({ where: { username } });
-        if (user) {
-            if (await comparePwd(password, user.password)) {
-                const tokenSession = await signToken(user);
-                res.status(200).json({ user, tokenSession });
-            } else {
-                res.status(401).json({ error: 'Password is incorrect' });
-            }
+        if (user && await comparePassword(password, user.password)) {
+            const tokenSession = await signToken(user);
+            res.status(200).json({ user, tokenSession });
         } else {
-            res.status(404).json({ error: 'This username does not exist' });
+            res.status(400).json({ error: 'Username or password has incorrect' });
         }
     } catch (error) {
-        res.status(400).json(error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 }
 
