@@ -51,7 +51,8 @@
 }
 
 .btnContainer a.btn {
-    padding: 5rem 2.5rem;
+    align-content: center;
+    padding: 3rem;
     background: #cf9885;
     color: #000;
     font-weight: 600;
