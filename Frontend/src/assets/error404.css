@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: 0;
+    color: #000;
+    text-decoration: none;
+}
+
+::selection {
+    background-color: #cf9885;
+    color: #000;
+}
+
+.errorPage {
+    width: auto;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    background-image: url("./Rectangle.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.heading h1 {
+    font-size: 128px;
+}
+
+.subHeading h3 {
+    font-size: 64px;
+    margin-top: -20px;
+    text-align: center;
+}
+
+.description p {
+    font-size: 18px;
+    margin-top: 20px;
+    width: 50vw;
+    text-align: center;
+}
+
+.btnContainer a.btn {
+    padding: 5rem 2.5rem;
+    background: #cf9885;
+    color: #000;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+}
+
+.btnContainer a.btn:hover {
+    filter: brightness(1.1);
+}
+
+.leftImage img {
+    height: auto;
+    position: absolute;
+    z-index: -1;
+    left: -100px;
+    top: -50px;
+}
+
+@media screen and (max-width: 1200px) {
+    .leftImage img {
+        left: -150px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .leftImage {
+       display: none;
+    }
+    .description p {
+        width: 90vw;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .heading h1 {
+        font-size: 64px;
+    }
+
+    .subHeading h3  {
+        font-size: 32px;
+        margin-top: 0px;
+    }
+}
