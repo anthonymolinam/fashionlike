@@ -6,8 +6,8 @@
     justify-content: center;
 }
 
-img{
-    height: 500px;
+.signin img{
+    max-height: 500px;
 }
 
 .img {
@@ -189,3 +189,12 @@ button:hover{
     cursor: pointer;
 }
 
+@media (max-width: 640px) {
+    .img {
+      display: none;
+    }
+    .Header{
+        left: 0;
+    }
+  }
+  
