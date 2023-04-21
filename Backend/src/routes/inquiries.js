@@ -1,11 +1,11 @@
-const router = require('express').Router();
-const userCtrl = require('../controllers/inquiries');
-const { checkAuth, checkRoleAuth } = require('../helpers/check');
+const router = require('express').Router()
+const userCtrl = require('../controllers/inquiries.ctrl')
+const { checkToken, checkRole } = require('../helpers/check_auth')
 
-router.get('/allusers', checkRoleAuth(['admin']), userCtrl.getAllUsers);
-router.get('/user/:username', userCtrl.getUser);
+router.get('/allusers', userCtrl.getAllUsers)
+router.get('/user/:username', userCtrl.getUser)
 
-router.put('/update-password', checkRoleAuth(['admin', 'user']), userCtrl.changePwd)
-router.put('/forgot-password', checkAuth, userCtrl.changePwd);
+router.put('/update-password', checkRole(['admin', 'user']), userCtrl.changePassword)
+router.put('/forgot-password', checkRole(['admin', 'user']), userCtrl.changePassword)
 
-module.exports = router;
+module.exports = router
