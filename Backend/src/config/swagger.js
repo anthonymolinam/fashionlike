@@ -33,15 +33,15 @@ const swaggerSpec = {
 
 function swaggerDocs(app, port) {
     try {
-        app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDoc(swaggerSpec)));
+        app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDoc(swaggerSpec)))
         app.get('/api/docs.json', (req, res) => {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(swaggerSpec);
+            res.setHeader('Content-Type', 'application/json')
+            res.send(swaggerSpec)
         })
-        console.log(`Docs available at http://localhost:${port}/api/docs\n`);
+        console.log(`Docs available at http://localhost:${port}/api/docs\n`)
     } catch (e) {
-        console.log(e);
+        console.log(e)
     }
 }
 
-module.exports = swaggerDocs;
+module.exports = swaggerDocs

@@ -1,8 +1,8 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
-const Pub = require('./publication');
+const { DataTypes } = require('sequelize')
+const sequelize = require('../config/database')
+const Pub = require('./post')
 
-const User = sequelize.define('user', {
+const User = sequelize.define('users', {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -32,11 +32,11 @@ const User = sequelize.define('user', {
     }
 }, {
     freezeTableName: true
-});
+})
 
 Pub.belongsTo(User, {
     foreignKey: 'userId',
     targetId: 'id'
-});
+})
 
-module.exports = User;
+module.exports = User

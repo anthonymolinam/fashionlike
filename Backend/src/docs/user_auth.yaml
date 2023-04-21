@@ -18,9 +18,9 @@
                 description: Contraseña
     responses:
       200:
-        description: 'OK: La solicitud ha tenido éxito.'
+        description: 'OK'
       400:
-        description: 'Bad request: Esta respuesta significa que el servidor no pudo interpretar la solicitud dada una sintaxis inválida.'
+        description: 'Bad request'
 
 /signup:
   post:
@@ -50,8 +50,8 @@
                 description: Confirmar contraseña
     responses:
       201:
-        description: 'Created: La solicitud ha tenido éxito y se ha creado un nuevo recurso como resultado de ello.'
+        description: 'Created'
       400:
-        description: 'Bad Request: Esta respuesta significa que el servidor no pudo interpretar la solicitud dada una sintaxis inválida.'
+        description: 'Bad Request'
       409:
-        description: 'Conflict: Esta respuesta puede ser enviada cuando una petición tiene conflicto con el estado actual del servidor.'
+        description: 'Conflict'
