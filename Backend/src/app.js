@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // API routes
 app.use('/api', require('./routes/user_auth'))
-app.use('/api', require('./routes/inquiries'))
+app.use('/api', require('./routes/user_inquiries'))
+app.use('/api', require('./routes/user_post'))
 
 module.exports = app

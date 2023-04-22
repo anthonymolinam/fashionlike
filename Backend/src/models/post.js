@@ -9,9 +9,11 @@ const Post = sequelize.define('posts', {
     },
     description: {
         type: DataTypes.STRING,
+        allowNull: true
     },
     image: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: true
     }
 }, {
     freezeTableName: true

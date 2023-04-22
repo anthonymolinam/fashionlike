@@ -34,9 +34,9 @@ const User = sequelize.define('users', {
     freezeTableName: true
 })
 
-Pub.belongsTo(User, {
+/* Pub.belongsTo(User, {
     foreignKey: 'userId',
     targetId: 'id'
-})
+}) */
 
 module.exports = User

@@ -9,7 +9,7 @@ app.listen(port, async () => {
     console.log(`\nServer is on`)
     swaggerDocs(app, port)
     try {
-        await sequelize.sync()
+        await sequelize.sync({ alter: true })
     } catch (error) {
         console.error('Unable to connect to the database:', error.message)
     }
