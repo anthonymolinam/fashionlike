@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../config/database')
 
-const Post = sequelize.define('posts', {
+const PostSchema = sequelize.define('posts', {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -19,4 +19,4 @@ const Post = sequelize.define('posts', {
     freezeTableName: true
 })
 
-module.exports = Post
+module.exports = PostSchema

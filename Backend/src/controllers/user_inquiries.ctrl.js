@@ -1,11 +1,11 @@
 const { hashPassword, comparePassword } = require('../helpers/hash_password')
-const User = require('../models/user')
+const UserSchema = require('../models/user')
 const { verifyToken } = require('../helpers/generate_token')
 const { checkToken } = require('../helpers/check_auth')
 
 const getAllUsers = async (req, res) => {
     try {
-        const users = await User.findAll()
+        const users = await UserSchema.findAll()
         let usersArray = []
         if (!users)
             return res.status(404).json({ error: 'Users Not Found' })
@@ -25,7 +25,7 @@ const getAllUsers = async (req, res) => {
 const getUser = async (req, res) => {
     try {
         const { username } = req.params
-        const user = await User.findOne({ where: { username } })
+        const user = await UserSchema.findOne({ where: { username } })
         if (!user)
             return res.status(404).json({ error: 'User Not Found' })
         res.status(200).json({
@@ -43,18 +43,18 @@ const changePassword = async (req, res) => {
         const { password1, password2, currentPassword } = req.body
 
         const tokenData = await checkToken(req.headers.authorization)
-        const userFound = await User.findByPk(tokenData.id)
+        const user = await UserSchema.findByPk(tokenData.id)
 
         if (!currentPassword) {
             if ((password1 === password2)) {
-                await userFound.set({ password: await hashPassword(password1) }).save()
+                await user.set({ password: await hashPassword(password1) }).save()
                 res.status(200).json({ message: 'Password has been changed' })
             } else {
                 res.status(400).json({ error: 'Passwords do not match' })
             }
         } else {
-            if ((password1 === password2) && (await comparePassword(currentPassword, userFound.password))) {
-                await userFound.set({ password: await hashPassword(password1) }).save()
+            if ((password1 === password2) && (await comparePassword(currentPassword, user.password))) {
+                await user.set({ password: await hashPassword(password1) }).save()
                 res.status(200).json({ message: 'Password has been changed' })
             } else {
                 res.status(400).json({ error: 'Passwords do not match or current password has incorrect' })

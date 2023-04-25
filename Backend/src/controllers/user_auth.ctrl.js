@@ -1,4 +1,4 @@
-const User = require('../models/user')
+const UserSchema = require('../models/user')
 const { signToken } = require('../helpers/generate_token')
 const { hashPassword, comparePassword } = require('../helpers/hash_password')
 const zxcvbn = require('zxcvbn')
@@ -11,7 +11,7 @@ const signup = async (req, res) => {
             return res.status(400).json({ error: 'Password is too weak' })
         }
         if (password1 === password2) {
-            await User.create({
+            await UserSchema.create({
                 username,
                 email,
                 password: await hashPassword(password1)
@@ -33,7 +33,7 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { username, password } = req.body
-        const user = await User.findOne({ where: { username } })
+        const user = await UserSchema.findOne({ where: { username } })
         if (user && await comparePassword(password, user.password)) {
             const tokenSession = await signToken(user)
             res.status(200).json({

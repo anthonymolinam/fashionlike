@@ -1,5 +1,5 @@
 const { toDrive } = require('../helpers/googleapi')
-const Post = require('../models/post')
+const PostSchema = require('../models/post')
 const url = 'https://drive.google.com/uc?id='
 
 const uploadFile = async (req, res) => {
@@ -18,7 +18,7 @@ const uploadFile = async (req, res) => {
 
 const saveIdFile = async (imageId, description) => {
     try {
-        await Post.create({ description, image: url + imageId })
+        await PostSchema.create({ description, image: url + imageId })
         return 'post created'
     } catch (e) {
         return null
@@ -27,7 +27,7 @@ const saveIdFile = async (imageId, description) => {
 
 const getAllPosts = async (req, res) => {
     try {
-        const posts = await Post.findAll()
+        const posts = await PostSchema.findAll()
         res.json({ posts })
     } catch (e) {
         return res.json(null)

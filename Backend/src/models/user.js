@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 const sequelize = require('../config/database')
 const Post = require('./post')
 
-const User = sequelize.define('users', {
+const UserSchema = sequelize.define('users', {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -34,14 +34,14 @@ const User = sequelize.define('users', {
     freezeTableName: true
 })
 
-User.hasMany(Post, {
+UserSchema.hasMany(Post, {
     foreignKey: 'userId',
     sourceKey: 'id'
 })
 
-Post.belongsTo(User, {
+Post.belongsTo(UserSchema, {
     foreignKey: 'userId',
     targetId: 'id'
 })
 
-module.exports = User
+module.exports = UserSchema
