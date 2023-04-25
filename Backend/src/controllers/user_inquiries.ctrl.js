@@ -43,18 +43,18 @@ const changePassword = async (req, res) => {
         const { password1, password2, currentPassword } = req.body
 
         const tokenData = await checkToken(req.headers.authorization)
-        const user = await User.findOne({ where: { id: tokenData.id } })
+        const userFound = await User.findByPk(tokenData.id)
 
         if (!currentPassword) {
             if ((password1 === password2)) {
-                await User.update({ password: await hashPassword(password1) }, { where: { id: tokenData.id } })
+                await userFound.set({ password: await hashPassword(password1) }).save()
                 res.status(200).json({ message: 'Password has been changed' })
             } else {
                 res.status(400).json({ error: 'Passwords do not match' })
             }
         } else {
-            if ((password1 === password2) && (await comparePassword(currentPassword, user.password))) {
-                await User.update({ password: await hashPassword(password1) }, { where: { id: tokenData.id } })
+            if ((password1 === password2) && (await comparePassword(currentPassword, userFound.password))) {
+                await userFound.set({ password: await hashPassword(password1) }).save()
                 res.status(200).json({ message: 'Password has been changed' })
             } else {
                 res.status(400).json({ error: 'Passwords do not match or current password has incorrect' })
