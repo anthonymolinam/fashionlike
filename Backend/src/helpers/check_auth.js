@@ -1,16 +1,16 @@
 const { verifyToken } = require('./generate_token')
 
-const checkToken = async (req, res, next) => {
+const checkToken = async (authorization) => {
     try {
-        const token = req.headers.authorization.split(' ').pop()
+        const token = authorization.split(' ').pop()
         const tokenData = await verifyToken(token)
         if (tokenData) {
-            next()
+            return tokenData
         } else {
-            res.status(403).json({ error: "Forbidden" })
+            return null
         }
     } catch (error) {
-        res.status(401).json({ error: "Invalid Token" })
+        return error
     }
 }
 

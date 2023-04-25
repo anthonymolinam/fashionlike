@@ -20,8 +20,8 @@ const signup = async (req, res) => {
         } else {
             res.status(400).json({ error: 'Passwords do not match' })
         }
-    } catch (error) {
-        res.status(409).json({
+    } catch (e) {
+        return res.status(409).json({
             name: error.name,
             message: error.errors[0].message,
             type: error.errors[0].type,
@@ -45,8 +45,8 @@ const login = async (req, res) => {
         } else {
             res.status(400).json({ error: 'Username or password has incorrect' })
         }
-    } catch (error) {
-        res.status(500).json({ error: 'Internal server error' })
+    } catch (e) {
+        return res.status(500).json({ error: 'Internal server error' })
     }
 }
 

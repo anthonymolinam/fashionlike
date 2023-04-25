@@ -11,8 +11,8 @@ const uploadFile = async (req, res) => {
         const postCreate = await saveIdFile(drive.data.id, description)
 
         res.json({ postCreate })
-    } catch (error) {
-        res.json({ error })
+    } catch (e) {
+        return res.json({ error: 'Upload failed' })
     }
 }
 
@@ -20,7 +20,7 @@ const saveIdFile = async (imageId, description) => {
     try {
         await Post.create({ description, image: url + imageId })
         return 'post created'
-    } catch (error) {
+    } catch (e) {
         return null
     }
 }
@@ -29,8 +29,8 @@ const getAllPosts = async (req, res) => {
     try {
         const posts = await Post.findAll()
         res.json({ posts })
-    } catch (error) {
-        res.json(null)
+    } catch (e) {
+        return res.json(null)
     }
 }
 

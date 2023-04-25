@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const { getAllUsers, getUser, changePassword } = require('../controllers/user_inquiries.ctrl')
-const { checkToken, checkRole } = require('../helpers/check_auth')
+const { checkRole } = require('../helpers/check_auth')
 
 router.get('/allusers', getAllUsers)
 router.get('/user/:username', getUser)

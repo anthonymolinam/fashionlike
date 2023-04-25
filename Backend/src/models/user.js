@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../config/database')
-const Pub = require('./post')
+const Post = require('./post')
 
 const User = sequelize.define('users', {
     id: {
@@ -34,9 +34,14 @@ const User = sequelize.define('users', {
     freezeTableName: true
 })
 
-/* Pub.belongsTo(User, {
+User.hasMany(Post, {
+    foreignKey: 'userId',
+    sourceKey: 'id'
+})
+
+Post.belongsTo(User, {
     foreignKey: 'userId',
     targetId: 'id'
-}) */
+})
 
 module.exports = User

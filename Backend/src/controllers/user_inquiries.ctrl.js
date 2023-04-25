@@ -1,6 +1,7 @@
 const { hashPassword, comparePassword } = require('../helpers/hash_password')
 const User = require('../models/user')
 const { verifyToken } = require('../helpers/generate_token')
+const { checkToken } = require('../helpers/check_auth')
 
 const getAllUsers = async (req, res) => {
     try {
@@ -16,8 +17,8 @@ const getAllUsers = async (req, res) => {
             })
         }
         res.status(200).json(usersArray)
-    } catch (error) {
-        res.status(400).json({ error: 'Bad Request' })
+    } catch (e) {
+        return res.status(400).json({ error: 'Bad Request' })
     }
 }
 
@@ -32,8 +33,8 @@ const getUser = async (req, res) => {
             username: user.username,
             email: user.email
         })
-    } catch (error) {
-        res.status(400).json({ error: 'Bad Request' })
+    } catch (e) {
+        return res.status(400).json({ error: 'Bad Request' })
     }
 }
 
@@ -41,8 +42,7 @@ const changePassword = async (req, res) => {
     try {
         const { password1, password2, currentPassword } = req.body
 
-        const token = req.headers.authorization.split(' ').pop()
-        const tokenData = await verifyToken(token)
+        const tokenData = await checkToken(req.headers.authorization)
         const user = await User.findOne({ where: { id: tokenData.id } })
 
         if (!currentPassword) {
@@ -60,8 +60,8 @@ const changePassword = async (req, res) => {
                 res.status(400).json({ error: 'Passwords do not match or current password has incorrect' })
             }
         }
-    } catch (error) {
-        res.status(500).json({ error: 'Internal server error' })
+    } catch (e) {
+        return res.status(500).json({ error: 'Internal server error' })
     }
 }
 
