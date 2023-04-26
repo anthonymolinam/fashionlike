@@ -1,27 +1,19 @@
-const { toDrive } = require('../helpers/googleapi')
+const { toDrive, saveIdFile } = require('../helpers/save_file')
 const PostSchema = require('../models/post')
-const url = 'https://drive.google.com/uc?id='
+const { checkToken } = require('../helpers/check_auth')
 
 const uploadFile = async (req, res) => {
     try {
+        const tokenData = await checkToken(req.headers.authorization)
         const { mimetype, filename, path } = req.file
         const { description } = req.body
-
+        
         const drive = await toDrive(filename, mimetype, path)
-        const postCreate = await saveIdFile(drive.data.id, description)
+        const postCreate = await saveIdFile(description, drive.data.id, tokenData.id)
 
         res.json({ postCreate })
     } catch (e) {
         return res.json({ error: 'Upload failed' })
-    }
-}
-
-const saveIdFile = async (imageId, description) => {
-    try {
-        await PostSchema.create({ description, image: url + imageId })
-        return 'post created'
-    } catch (e) {
-        return null
     }
 }
 

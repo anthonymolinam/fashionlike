@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../config/database')
-const Post = require('./post')
+const PostSchema = require('./post')
 
 const UserSchema = sequelize.define('users', {
     id: {
@@ -34,12 +34,12 @@ const UserSchema = sequelize.define('users', {
     freezeTableName: true
 })
 
-UserSchema.hasMany(Post, {
+UserSchema.hasMany(PostSchema, {
     foreignKey: 'userId',
     sourceKey: 'id'
 })
 
-Post.belongsTo(UserSchema, {
+PostSchema.belongsTo(UserSchema, {
     foreignKey: 'userId',
     targetId: 'id'
 })

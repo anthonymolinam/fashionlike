@@ -1,7 +1,11 @@
 require('dotenv').config()
 const { google } = require('googleapis')
 const fs = require('fs')
+
 const credentials = require('../../credentials.json')
+const PostSchema = require('../models/post')
+
+const url = 'https://drive.google.com/uc?id='
 
 const auth = new google.auth.JWT(
     credentials.client_email,
@@ -33,4 +37,13 @@ const toDrive = (name, mimeType, path) => {
     }
 }
 
-module.exports = { toDrive }
+const saveIdFile = async (description, imageId, userId) => {
+    try {
+        const x = await PostSchema.create({ description, image: url + imageId, userId})
+        return x
+    } catch (e) {
+        return null
+    }
+}
+
+module.exports = { toDrive, saveIdFile }
