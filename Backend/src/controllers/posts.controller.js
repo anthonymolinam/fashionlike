@@ -7,7 +7,7 @@ const uploadFile = async (req, res) => {
         const tokenData = await checkToken(req.headers.authorization)
         const { mimetype, filename, path } = req.file
         const { description } = req.body
-        
+
         const drive = await toDrive(filename, mimetype, path)
         const postCreate = await saveIdFile(description, drive.data.id, tokenData.id)
 
@@ -19,8 +19,8 @@ const uploadFile = async (req, res) => {
 
 const getAllPosts = async (req, res) => {
     try {
-        const posts = await PostSchema.findAll()
-        res.json({ posts })
+        const posts = await PostSchema.findAll({order: [['createdAt', 'DESC']]})
+        res.json(posts)
     } catch (e) {
         return res.json(null)
     }

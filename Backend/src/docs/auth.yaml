@@ -1,7 +1,7 @@
-/login:
+/auth/login:
   post:
     tags:
-      - Auth
+      - Autenticación y Autorización
     description: Inicio de sesion de usuario.
     requestBody:
       required: true
@@ -22,10 +22,10 @@
       400:
         description: 'Bad request'
 
-/signup:
+/auth/signup:
   post:
     tags:
-      - Auth
+      - Autenticación y Autorización
     description: Registro para nuevos usuarios.
     requestBody:
       required: true

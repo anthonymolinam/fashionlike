@@ -13,8 +13,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // API routes
-app.use('/api', require('./routes/user_auth'))
-app.use('/api', require('./routes/user_inquiries'))
-app.use('/api', require('./routes/user_post'))
+app.use('/api/auth', require('./routes/auth.routes'))
+app.use('/api/user', require('./routes/user.routes'))
+app.use('/api/post', require('./routes/post.routes'))
 
 module.exports = app

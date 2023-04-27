@@ -1,16 +1,16 @@
-/upload/post:
+/post/upload:
   post:
     tags:
-      - post
+      - Publicaciones
     description: crea una publicacion
     responses:
       200:
         description: OK
 
-/posts:
+/post/all:
   get:
     tags:
-      - post
+      - Publicaciones
     description: Obtener todas las publicaciones
     security:
       - bearerAuth: []

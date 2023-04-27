@@ -33,15 +33,13 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { username, password } = req.body
-        const user = await UserSchema.findOne({ where: { username } })
+        const user = await UserSchema.findOne({
+            where: { username },
+            attributes: ['id', 'username', 'email', 'password', 'role']
+        })
         if (user && await comparePassword(password, user.password)) {
             const tokenSession = await signToken(user)
-            res.status(200).json({
-                id: user.id,
-                username: user.username,
-                email: user.email,
-                tokenSession
-            })
+            res.status(200).json({ user, tokenSession })
         } else {
             res.status(400).json({ error: 'Username or password has incorrect' })
         }

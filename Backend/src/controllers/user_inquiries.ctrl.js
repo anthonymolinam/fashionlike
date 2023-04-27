@@ -6,18 +6,10 @@ const { checkToken } = require('../helpers/check_auth')
 
 const getAllUsers = async (req, res) => {
     try {
-        const users = await UserSchema.findAll()
-        let usersArray = []
+        const users = await UserSchema.findAll({ attributes: ['id', 'username', 'email'] })
         if (!users)
             return res.status(404).json({ error: 'Users Not Found' })
-        for (let i = 0; i < users.length; i++) {
-            usersArray.push({
-                id: users[i].id,
-                username: users[i].username,
-                email: users[i].email
-            })
-        }
-        res.status(200).json(usersArray)
+        res.status(200).json(users)
     } catch (e) {
         return res.status(400).json({ error: 'Bad Request' })
     }
@@ -26,19 +18,12 @@ const getAllUsers = async (req, res) => {
 const getUser = async (req, res) => {
     try {
         const { username } = req.params
-        const user = await UserSchema.findOne({ where: { username } })
+        const user = await UserSchema.findOne({ where: { username }, attributes: ['id', 'username', 'email'] })
         const posts = await PostSchema.findAll({ where: { userId: user.id } })
 
         if (!user)
             return res.status(404).json({ error: 'User Not Found' })
-        res.status(200).json({
-            user: {
-                id: user.id,
-                username: user.username,
-                email: user.email
-            },
-            posts
-        })
+        res.status(200).json({ user, posts })
     } catch (e) {
         return res.status(400).json({ error: 'Bad Request' })
     }

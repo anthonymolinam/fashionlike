@@ -1,4 +1,4 @@
-/allusers:
+/user/all:
   get:
     tags:
       - Inquiries
@@ -30,7 +30,7 @@
       404:
         description: 'Not Found'
 
-/update-password:
+/user/update-password:
   put:
     tags:
       - Inquiries
@@ -61,7 +61,7 @@
       403:
         description: 'Forbidden'
 
-/forgot-password:
+/user/forgot-password:
   put:
     tags:
       - Inquiries
