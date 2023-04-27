@@ -6,7 +6,7 @@ const { checkToken } = require('../helpers/check_auth')
 
 const getAllUsers = async (req, res) => {
     try {
-        const users = await UserSchema.findAll({ attributes: ['id', 'username', 'email'] })
+        const users = await UserSchema.findAll({ attributes: ['id', 'username', 'email', 'role'] })
         if (!users)
             return res.status(404).json({ error: 'Users Not Found' })
         res.status(200).json(users)
@@ -18,7 +18,7 @@ const getAllUsers = async (req, res) => {
 const getUser = async (req, res) => {
     try {
         const { username } = req.params
-        const user = await UserSchema.findOne({ where: { username }, attributes: ['id', 'username', 'email'] })
+        const user = await UserSchema.findOne({ where: { username }, attributes: ['id', 'username', 'email', 'role'] })
         const posts = await PostSchema.findAll({ where: { userId: user.id } })
 
         if (!user)
