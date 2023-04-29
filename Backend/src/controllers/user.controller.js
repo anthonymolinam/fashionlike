@@ -1,19 +1,7 @@
 const { hashPassword, comparePassword } = require('../helpers/hash_password')
 const UserSchema = require('../models/user')
 const PostSchema = require('../models/post')
-const { verifyToken } = require('../helpers/generate_token')
 const { checkToken } = require('../helpers/check_auth')
-
-const getAllUsers = async (req, res) => {
-    try {
-        const users = await UserSchema.findAll({ attributes: ['id', 'username', 'email', 'role'] })
-        if (!users)
-            return res.status(404).json({ error: 'Users Not Found' })
-        res.status(200).json(users)
-    } catch (e) {
-        return res.status(400).json({ error: 'Bad Request' })
-    }
-}
 
 const getUser = async (req, res) => {
     try {
@@ -57,7 +45,6 @@ const changePassword = async (req, res) => {
 }
 
 module.exports = {
-    getAllUsers,
     getUser,
     changePassword
 }

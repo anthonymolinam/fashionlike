@@ -1,22 +1,7 @@
-/user/all:
-  get:
-    tags:
-      - Inquiries
-    description: Obtener todos los usuarios
-    security:
-      - bearerAuth: []
-    responses:
-      200:
-        description: 'OK'
-      400:
-        description: 'Bad request'
-      404:
-        description: 'Not Found'
-
 /user/{username}:
   get:
     tags:
-      - Inquiries
+      - Usuario
     description: Busqueda de usuario
     parameters:
       - name: username
@@ -33,7 +18,7 @@
 /user/update-password:
   put:
     tags:
-      - Inquiries
+      - Usuario
     description: Cambio de contraseña para usuarios con sesión iniciada.
     requestBody:
       required: true
@@ -64,7 +49,7 @@
 /user/forgot-password:
   put:
     tags:
-      - Inquiries
+      - Usuario
     description: Cambio de contraseña para usuarios que olvidaron su contraseña.
     requestBody:
       required: true

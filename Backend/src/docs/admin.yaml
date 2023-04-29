@@ -1,0 +1,126 @@
+/admin/allusers:
+  get:
+    tags:
+      - Admin
+    description: Obtener todos los usuarios
+    security:
+      - bearerAuth: []
+    responses:
+      200:
+        description: "OK"
+      400:
+        description: "Bad request"
+      404:
+        description: "Not Found"
+
+/admin/update/post/{post id}:
+  put:
+    tags:
+      - Admin
+    description: Editar publicación
+    parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+        description: id de publicacion
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                description: Description de la publicacion
+                example: ''
+    security:
+      - bearerAuth: []
+    responses:
+      200:
+        description: "OK"
+      404:
+        description: "Not Found"
+
+/admin/delete/post/{post id}:
+  delete:
+    tags:
+      - Admin
+    description: Eliminar Publicacion
+    parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+        description: id de publicacion
+    security:
+      - bearerAuth: []
+    responses:
+      200:
+        description: "OK"
+      404:
+        description: "Not Found"
+
+/admin/update/user/{post id}:
+  put:
+    tags:
+      - Admin
+    description: Editar usuario
+    parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+        description: id de usuario
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: Nombre de usuario
+                example: ''
+              email:
+                type: string
+                description: Email de usuario
+                example: ''
+              password:
+                type: string
+                description: Contraseña
+                example: ''
+              verified:
+                type: boolean
+                description: verificación
+                example: false
+              role:
+                type: string
+                description: Rol/permiso de usuario
+                example: ''
+    security:
+      - bearerAuth: []
+    responses:
+      200:
+        description: "OK"
+      404:
+        description: "Not Found"
+
+/admin/delete/user/{post id}:
+  delete:
+    tags:
+      - Admin
+    description: Eliminar usuario
+    parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+        description: id de usuario
+    security:
+      - bearerAuth: []
+    responses:
+      200:
+        description: "OK"
+      404:
+        description: "Not Found"

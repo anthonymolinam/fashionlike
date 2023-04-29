@@ -1,7 +1,9 @@
 const router = require('express').Router()
 
 const { checkRole } = require('../helpers/check_auth')
-const { editPost, editUser, deletePost, deleteUser } = require('../controllers/admin.controller')
+const { getAllUsers, editPost, editUser, deletePost, deleteUser } = require('../controllers/admin.controller')
+
+router.get('/allusers', checkRole(['admin']), getAllUsers)
 
 router.put('/update/post/:id', checkRole(['admin']), editPost)
 router.put('/update/user/:id', checkRole(['admin']), editUser)
