@@ -4,7 +4,7 @@ const { hashPassword } = require('../helpers/hash_password')
 
 const getAllUsers = async (req, res) => {
     try {
-        const users = await UserSchema.findAll({ attributes: ['id', 'username', 'email', 'role'] })
+        const users = await UserSchema.findAll()
         if (!users)
             return res.status(404).json({ error: 'Users Not Found' })
         res.status(200).json(users)
@@ -28,7 +28,15 @@ const editUser = async (req, res) => {
     try {
         const { id } = req.params
         const { username, email, password, verified, role } = req.body
-        await UserSchema.update({ username, email, password: await hashPassword(password), verified, role }, { where: { id } })
+        await UserSchema.update({
+            username,
+            email,
+            password: await hashPassword(password),
+            verified,
+            role
+        }, {
+            where: { id }
+        })
         res.status(200).json({ message: 'User has been edited' })
     } catch (e) {
         res.status(404).json({ error: 'This user id does not exist' })

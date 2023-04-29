@@ -5,10 +5,10 @@ const { getAllUsers, editPost, editUser, deletePost, deleteUser } = require('../
 
 router.get('/allusers', checkRole(['admin']), getAllUsers)
 
-router.put('/update/post/:id', checkRole(['admin']), editPost)
-router.put('/update/user/:id', checkRole(['admin']), editUser)
+router.put('/post/:id', checkRole(['admin']), editPost)
+router.put('/user/:id', checkRole(['admin']), editUser)
 
-router.delete('/delete/post/:id', checkRole(['admin']), deletePost)
-router.delete('/delete/user/:id', checkRole(['admin']), deleteUser)
+router.delete('/post/:id', checkRole(['admin']), deletePost)
+router.delete('/user/:id', checkRole(['admin']), deleteUser)
 
 module.exports = router

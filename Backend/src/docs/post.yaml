@@ -3,6 +3,8 @@
     tags:
       - Publicaciones
     description: crea una publicacion
+    security:
+      - bearerAuth: []
     responses:
       200:
         description: OK
@@ -12,8 +14,6 @@
     tags:
       - Publicaciones
     description: Obtener todas las publicaciones
-    security:
-      - bearerAuth: []
     responses:
       200:
         description: OK

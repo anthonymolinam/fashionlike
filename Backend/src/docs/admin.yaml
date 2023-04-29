@@ -1,7 +1,7 @@
 /admin/allusers:
   get:
     tags:
-      - Admin
+      - Administrador
     description: Obtener todos los usuarios
     security:
       - bearerAuth: []
@@ -13,10 +13,10 @@
       404:
         description: "Not Found"
 
-/admin/update/post/{post id}:
+/admin/post/{post id}:
   put:
     tags:
-      - Admin
+      - Administrador
     description: Editar publicación
     parameters:
       - name: id
@@ -41,11 +41,10 @@
         description: "OK"
       404:
         description: "Not Found"
-
-/admin/delete/post/{post id}:
+        
   delete:
     tags:
-      - Admin
+      - Administrador
     description: Eliminar Publicacion
     parameters:
       - name: id
@@ -61,10 +60,10 @@
       404:
         description: "Not Found"
 
-/admin/update/user/{post id}:
+/admin/user/{post id}:
   put:
     tags:
-      - Admin
+      - Administrador
     description: Editar usuario
     parameters:
       - name: id
@@ -106,10 +105,9 @@
       404:
         description: "Not Found"
 
-/admin/delete/user/{post id}:
   delete:
     tags:
-      - Admin
+      - Administrador
     description: Eliminar usuario
     parameters:
       - name: id
