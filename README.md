@@ -64,7 +64,6 @@ El backend de la aplicación Fashionlike proporciona una API REST que permite a 
 - Obtener información sobre las publicaciones de otros usuarios
 - Crear nuevas publicaciones
 - Editar y eliminar publicaciones propias
-- Dar "me gusta" y comentar en publicaciones
 
 Para obtener más información sobre cómo utilizar la API, consulta la documentación oficial de la API que se proporciona en el repositorio de GitHub.
 
