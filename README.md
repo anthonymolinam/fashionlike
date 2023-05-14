@@ -74,7 +74,3 @@ Para obtener más información sobre cómo utilizar la API, consulta la document
 - PostgreSQL
 - Sequelize
 - Google Cloud
-
-## Licencia
-
-Este backend está bajo la Licencia ISC.
