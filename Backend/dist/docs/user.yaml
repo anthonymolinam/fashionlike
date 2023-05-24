@@ -1,0 +1,75 @@
+/user/{username}:
+  get:
+    tags:
+      - Usuario
+    description: Busqueda de usuario
+    parameters:
+      - name: username
+        in: path
+        type: string
+        required: true
+        description: Nombre de usuario para obtener sus datos
+    responses:
+      200:
+        description: 'OK'
+      404:
+        description: 'Not Found'
+
+/user/update-password:
+  put:
+    tags:
+      - Usuario
+    description: Cambio de contraseña para usuarios con sesión iniciada.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              password1:
+                type: string
+                description: Contraseña nueva
+              password2:
+                type: string
+                description: Confirmar contraseña nueva
+              currentPassword:
+                type: string
+                description: Contraseña actual
+    security:
+      - bearerAuth: []
+    responses:
+      200:
+        description: 'OK'
+      401:
+        description: 'Unauthorized'
+      403:
+        description: 'Forbidden'
+
+/user/forgot-password:
+  put:
+    tags:
+      - Usuario
+    description: Cambio de contraseña para usuarios que olvidaron su contraseña.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              password1:
+                type: string
+                description: Contraseña nueva
+              password2:
+                type: string
+                description: Confirmar contraseña nueva
+    security:
+      - bearerAuth: []
+    responses:
+      200:
+        description: 'OK'
+      401:
+        description: 'Unauthorized'
+      403:
+        description: 'Forbidden'

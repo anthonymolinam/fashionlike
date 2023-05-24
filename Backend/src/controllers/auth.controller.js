@@ -7,9 +7,9 @@ const zxcvbn = require('zxcvbn')
 const signup = async (req, res) => {
     try {
         const { username, email, password1, password2 } = req.body
-        if (zxcvbn(password1).score < 3) {
+        /* if (zxcvbn(password1).score < 3) {
             return res.status(400).json({ error: 'Password is too weak' })
-        }
+        } */
         if (password1 === password2) {
             await UserSchema.create({
                 username,
