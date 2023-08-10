@@ -1,6 +1,6 @@
 # Fashionlike - Backend
 
-Este es el backend de la aplicación Fashionlike, una aplicación web que permite a los usuarios compartir publicaciones de moda. Este backend está desarrollado utilizando Node.js y Express, y utiliza una base de datos PostgreSQL para almacenar la información de los usuarios y sus publicaciones.
+Este es el backend de la aplicación Fashionlike, una aplicación web que permite a los usuarios compartir publicaciones de moda. Este backend está desarrollado utilizando Node.js y Express, y utiliza una base de datos mysqlQL para almacenar la información de los usuarios y sus publicaciones.
 
 ## Cómo instalar la aplicación
 
@@ -12,13 +12,13 @@ Este comando instalará todas las dependencias necesarias para ejecutar el backe
 
 ## Cómo configurar la base de datos
 
-Para configurar la base de datos PostgreSQL, primero debes crear una base de datos en tu servidor de PostgreSQL. A continuación, debes configurar las variables de entorno necesarias para que el backend pueda conectarse a tu base de datos. Para hacer esto, crea un archivo `.env` en la raíz de tu proyecto y configura las siguientes variables de entorno:
+Para configurar la base de datos MySQL, primero debes crear una base de datos en tu servidor de MySQL. A continuación, debes configurar las variables de entorno necesarias para que el backend pueda conectarse a tu base de datos. Para hacer esto, crea un archivo `.env` en la raíz de tu proyecto y configura las siguientes variables de entorno:
 
- - DB_HOST=<tu_host_de_postgres>
- - DB_PORT=<tu_puerto_de_postgres>
+ - DB_HOST=<tu_host_de_mysql>
+ - DB_PORT=<tu_puerto_de_mysql>
  - DB_NAME=<el_nombre_de_tu_base_de_datos>
- - DB_USER=<tu_usuario_de_postgres>
- - DB_PASSWORD=<tu_contraseña_de_postgres>
+ - DB_USER=<tu_usuario_de_mysql>
+ - DB_PASSWORD=<tu_contraseña_de_mysql>
 
 ## Uso de la API de Google Drive
 
@@ -71,6 +71,6 @@ Para obtener más información sobre cómo utilizar la API, consulta la document
 
 - Node.js
 - Express
-- PostgreSQL
+- MySQL
 - Sequelize
-- Google Cloud
+- Google Drive API
